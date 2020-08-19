@@ -11,7 +11,7 @@ function GifViewer() {
       )
         .then((r) => r.json())
         .then((resp) => setGifData(resp.data));
-      }else {
+    } else {
       fetch(
         `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_GIPHY_API}&limit=25&rating=g`
       )
@@ -25,19 +25,25 @@ function GifViewer() {
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search"
-        value={query}
-        onChange={handleChange}
-      />
-      {gifData.map((gif) => (
-        <span>
-          <img src={gif.images.downsized.url} alt={gif.title} />
-        </span>
-      ))}
-    </div>
+    <React.Fragment>
+      <div>
+        Type something fun:
+        <input
+          type="text"
+          className="searchbar"
+          placeholder="Search"
+          value={query}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="allgifs">
+        {gifData.map((gif) => (
+          <span>
+            <img src={gif.images.downsized.url} alt={gif.title} />
+          </span>
+        ))}
+      </div>
+    </React.Fragment>
   );
 }
 
